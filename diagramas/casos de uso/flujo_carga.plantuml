@@ -1,0 +1,8 @@
+@startuml
+Retail -> OPL : Asigna carga
+OPL -> Transportista : Asigna ruta
+Transportista -> Customer : Entrega carga
+Customer -> Transportista : Confirmación entrega
+Transportista -> OPL : Confirmación entrega
+OPL -> Retail : Confirmación entrega
+@enduml
