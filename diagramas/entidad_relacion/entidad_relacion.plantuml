@@ -1,0 +1,129 @@
+@startuml entidades
+entity Organization{
+  * id : integer <<generated>>
+  --
+  * name : varchar(50)
+  * type : varchar(10)
+}
+entity Users{
+  * id : integer <<generated>>
+  * organization_id : integer <<FK>>
+  --
+  * username : varchar(50)
+  * email : varchar(50)
+  * password : varchar(50)
+}
+entity Operadores{
+  * id : integer <<generated>>
+  * users_id : integer <<FK>>
+  --
+  * name  : varchar(20)
+  * surname : varchar(20)
+  * dni : varchar(20)
+  * gender : varchar(20)
+}
+entity Vehículos {
+  * id : integer <<generated>>
+  * owner_id : integer <<FK>>
+  --
+  * type : varchar(20)
+  * brand : varchar(20)
+  * model : varchar(20)
+  * year : varchar(20)
+  * engine_n : varchar(20)
+  * chassis_n : varchar(20)
+  * serial_n : varchar(20)
+  * vin_n : varchar(20)
+  * ppu : varchar(20)
+  * status : varchar(20)
+  * adquisition_date : varchar(20)
+  * inscription : varchar(20)
+  * issuance_certificate : varchar(20)
+}
+entity "Vehicle Documents" as VehicleDocuments {
+  * id : integer <<generated>>
+  * vehicle_id : integer <<FK>>
+  --
+  * type : varchar(20)
+}
+entity "Operator Documents" as OperatorDocuments {
+  * id : integer <<generated>>
+  * operator_id : integer <<FK>>
+  --
+  * type : varchar(20)
+}
+entity Contracts{
+  * id : integer <<generated>>
+  * users_id : integer <<FK>>
+  --
+  * init_date
+  * end_date
+}
+entity Terms {
+  * id : integer <<generated>>
+  * user_id : integer <<FK>>
+  --
+  * key : varchar(20)
+  * value : varchar(20)
+}
+entity Contracts_Terms {
+  * contract_id : integer <<FK>>
+  * terms_id : integer <<FK>>
+}
+entity Owner {
+  * id : integer <<generated>>
+  --
+  * name : varchar(20)
+  * username : varchar(20)
+  * address : varchar(20)
+  * region : varchar(20)
+  * commune : varchar(20)
+  * numeration : varchar(20)
+}
+entity "Promotions\nOwner" as Promotions_Owner {
+  * id : integer <<generated>>
+  * users_id : integer <<FK>>
+  --
+  * name : varchar(20)
+  * qty : varchar(20)
+  * init_date : datetime
+  * end_date : datetime
+}
+entity "Promotions\nAssign" as Promotions_Assign {
+  * id : integer <<generated>>
+  * promotion_owner_id : integer <<FK>>
+  * users_id : integer <<FK>>
+}
+entity applications {
+  * id : integer <<generated>>
+  * vehicle_id : integer <<FK>>
+  * operator_id : integer <<FK>>
+  * contract_id : integer <<FK>>
+}
+entity Role {
+  * id : integer <<generated>>
+  --
+  * name: varchar(20)
+}
+Users }|--|{ Role
+Vehículos ||--o{ applications
+Operadores ||--o{ applications
+applications }|--|| Contracts
+Users ||--o{ Contracts
+Users ||--o{ Terms
+Users ||--o{ Promotions_Owner
+Users ||--o{ Promotions_Assign
+Promotions_Owner ||--o{ Promotions_Assign
+Terms ||--|{ Contracts_Terms
+Contracts ||--|{ Contracts_Terms
+' 1 Organización tiene 1 ó muchos Users
+Organization ||--|{ Users
+' 1 Transportista tiene 0 ó muchos Vehículos
+Users ||--o{ Vehículos
+' 1 Transportista tiene 0 ó muchos Operadores
+Users ||--o{ Operadores
+' 1 Transportista tiene 0 ó muchos Documents
+Vehículos ||--o{ VehicleDocuments
+Operadores ||--o{ OperatorDocuments
+Owner ||--o| Vehículos
+@enduml
