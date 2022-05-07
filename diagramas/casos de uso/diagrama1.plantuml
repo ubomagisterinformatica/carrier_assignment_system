@@ -1,0 +1,59 @@
+@startuml
+left to right direction
+actor "Server" as serve
+actor "Transportista\n c/Plan" as transcp
+actor "Transportista\n s/Plan" as transsp
+transcp -> transsp
+actor "Operador\nLogistico\n c/Plan" as opercp
+actor "Operador\nLogistico\n s/Plan" as opersp
+opercp -> opersp
+' actor "Courrier" as courr
+' actor "Admin" as admin
+actor "Asistente\nSeguimiento" as asiss
+actor "Tracking App" as trackapp
+rectangle Sistema {
+    usecase "Administración" as UC0
+    usecase "Recursos" as UC1
+    usecase "Visualizar" as UC8
+    UC1 ..> UC8 : <<include>>
+    usecase "Contratos" as UC2
+    usecase "Control" as UC3
+    usecase "Seguimiento" as UC4
+    usecase "Documentación" as UC5
+    usecase "Verificación de documentos" as UC6
+    UC5 ..> UC6 : <<include>>
+    usecase "Capacitación" as UC7
+    usecase "Rutas" as UC9
+    usecase "Visualizar contratos y rutas" as UC10
+    UC4 ..> UC10 : <<include>>
+    usecase "Métricas" as UC11
+    UC3 ..> UC11 : <<include>>
+    UC11 <.. opercp
+    UC10 -- asiss
+    UC2 ..> UC9 : <<include>>
+    UC6 -- opercp
+    UC8 -- opersp
+    UC9 -- opercp
+    transsp -- UC0
+    opersp -- UC0
+    transsp -- UC1
+    transcp -- UC3
+    transcp -- UC2
+    transcp -- UC4
+    transsp -- UC5
+    transcp -- UC7
+    UC9 -- trackapp
+    ' trans -- UC2
+    ' courr -- UC2
+    ' trans -- UC3
+    ' courr -- UC3
+    ' trans -- UC4
+    ' asiss -- UC4
+    ' trans -- UC5
+    ' trans -- UC7
+    ' courr -- UC7
+    ' courr -- UC3
+    ' oper -- UC4
+    ' admin -- UC3
+    }
+@enduml

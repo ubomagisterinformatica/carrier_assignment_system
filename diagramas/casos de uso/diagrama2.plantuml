@@ -1,0 +1,72 @@
+@startuml
+left to right direction
+actor "Transportista" as trans
+actor "Courrier" as courr
+rectangle Sistema {
+    usecase "Iniciar sesión" as UC0
+    usecase "Registrarse" as UC1
+    usecase "Verificar status cuenta" as UC2
+  usecase "Registrar flota" as UC3
+  usecase "Registrar tripulación" as UC4
+  usecase "Consultar contratos" as UC5
+  usecase "Consultar perfil courrier" as UC6
+  usecase "Postular a contrato" as UC7
+  usecase "Anular contrato" as UC8
+  usecase "Revisar propuesta de pago" as UC9
+  usecase "Publicar contrato" as UC10
+  usecase "Aprobar postulaciones a contratos" as UC11
+  usecase "Consultar perfil transportista" as UC12
+    usecase "Subir documentación" as UC13
+    usecase "Consultar flota activa" as UC14
+    usecase "Consultar tripulación activa" as UC24
+    usecase "Asignar flota-tripulación a contrato" as UC25
+  usecase "Consultar flota no activa" as UC15
+    usecase "Verificar tipo usuario administrador" as UC15
+    usecase "Coordinar instalacion GPS" as UC16
+    usecase "Validar documentacion" as UC17
+    usecase "Limites de plan" as UC18
+    usecase "Comprar plan" as UC19
+  usecase "Integrar app Tracking" as UC20
+    usecase "Listar postulaciones activos" as UC21
+    usecase "Coordinar evento" as UC22
+    usecase "Verificar condiciones" as UC23
+    UC3 ..> UC2 :include
+    UC7 ..> UC18 :include
+    UC3 ..> UC13 :include
+    UC3 ..> UC18 :include
+    UC4 ..> UC13 :include
+    UC7 ..> UC25 :include
+    UC25 ..> UC14 :include
+    UC25 ..> UC24 :include
+    UC7 ..> UC15 :include
+    UC7 ..> UC2 :include
+    UC5 ..> UC15 :include
+    UC13 ..> UC17 :include
+    UC10 ..> UC2 :include
+    UC10 ..> UC18 :include
+    UC11 ..> UC21 :include
+    UC16 ..> UC22 :include
+  UC20 ..> UC22 :include
+    UC8 ..> UC23 :include
+    UC9 ..> UC23 :include
+    trans -- UC20
+    trans -- UC0
+    courr -- UC0
+  trans -- UC1
+  trans -- UC3
+  trans -- UC4
+  trans -- UC5
+  trans -- UC6
+  trans -- UC7
+  courr -- UC8
+  courr -- UC9
+    courr -- UC10
+    courr -- UC11
+    courr -- UC1
+    courr -- UC12
+    trans -- UC16
+    courr -- UC16
+    trans -- UC19
+    courr -- UC19
+}
+@enduml
