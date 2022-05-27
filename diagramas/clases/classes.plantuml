@@ -4,8 +4,44 @@
         TRANSPORTIST_COMPANIES
     }
     
+    class Application {
+        Integer id
+        Integer vehicleId
+        Integer operatorId
+        Integer contractId
+    }
 
-    class Application {}
+    class Cars {
+        Integer id
+        Integer ownerId
+        String type
+        String brand
+        String model
+        Integer year
+        String engineNumber
+        String chassisNumber
+        String serialNumber
+        String vinNumber
+        String ppu
+        String status
+        String adquisition_date
+        String inscription
+        String issuance_certificate
+    }
+
+    class Contracts {
+        Integer id
+        Integer users_id
+        Integer init_date
+        Integer end_date
+    }
+
+    class ContractTerms {
+        Integer contractId
+        Integer termsId
+    }
+    
+    class Operators {}
 
     class Organization { 
         String name
@@ -14,24 +50,31 @@
     
     OrganizationType --> Organization : Una organización debe ser de tipo empresa operadora o transportista
 
+    class Owner {
+        Integer id
+        String name
+        String username
+        String address
+        String region
+        String commune
+        String numeration
+    }
+
+    class Role {
+        Integer id
+        String name
+    }
+
+    class Terms {
+        Integer id
+        Integer userId
+        String key
+        String value
+    }
+
     class Users {
         String username
         String password
         String email
     }
-
-
-
-    class Cars {}
-
-    class Contracts {}
-    
-    class Operators {}
-
-    class Owner {}
-
-    class Role {}
-
-
-
 @enduml
