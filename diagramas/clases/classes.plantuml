@@ -1,0 +1,37 @@
+@startuml classes
+    enum OrganizationType {
+        OPERATING_COMPANIES
+        TRANSPORTIST_COMPANIES
+    }
+    
+
+    class Application {}
+
+    class Organization { 
+        String name
+        OrganizationType type
+    }
+    
+    OrganizationType --> Organization : Una organización debe ser de tipo empresa operadora o transportista
+
+    class Users {
+        String username
+        String password
+        String email
+    }
+
+
+
+    class Cars {}
+
+    class Contracts {}
+    
+    class Operators {}
+
+    class Owner {}
+
+    class Role {}
+
+
+
+@enduml
