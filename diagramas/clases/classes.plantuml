@@ -6,14 +6,15 @@
     
     class Application {
         Integer id
-        Integer vehicleId
+        Integer carId
         Integer operatorId
         Integer contractId
     }
 
-    class Cars {
+    class Car {
         Integer id
         Integer ownerId
+        Integer userId
         String type
         String brand
         String model
@@ -29,11 +30,17 @@
         String issuance_certificate
     }
 
-    class Contracts {
+    class CarDocuments {
         Integer id
-        Integer users_id
-        Integer init_date
-        Integer end_date
+        Integer vehicleId
+        String type
+    }
+
+    class Contract {
+        Integer id
+        Integer userId
+        Date initDate
+        Date endDate
     }
 
     class ContractTerms {
@@ -41,23 +48,59 @@
         Integer termsId
     }
     
-    class Operators {}
+    class Operator {
+        Integer id
+        Integer userId
+        String name
+        String surname
+        String dni
+        String gender
+    }
+
+    class OperatorDocuments {
+        Integer id
+        Integer operatorId
+        String type
+    }
 
     class Organization { 
         String name
         OrganizationType type
     }
-    
-    OrganizationType --> Organization : Una organización debe ser de tipo empresa operadora o transportista
 
     class Owner {
         Integer id
         String name
         String username
         String address
-        String region
-        String commune
-        String numeration
+        Integer commune
+        Integer numeration
+    }
+
+    class PromotionsAssign {
+        Integer id
+        Integer promotionOwnerId
+        Integer userId
+    }
+
+    class PromotionsOwner {
+        Integer id
+        Integer userId
+        String name
+        String qty
+        Date initDate
+        Date endDate
+    }
+  
+    class Region {
+        Integer id
+        String name
+    }
+
+    class Commune {
+        Integer id
+        Integer regionId
+        String name
     }
 
     class Role {
@@ -72,9 +115,40 @@
         String value
     }
 
-    class Users {
+    class User {
+        Integer id
         String username
         String password
         String email
+        Integer RoleId
     }
+
+    Organization "1" *-- "many" User
+    User "1 or 0" *-- "many" Car
+    note on link
+        Solo los usuarios de empresas 
+        transportistas pueden tener vehiculos
+    endnote
+    Owner "1" *-- "many" Car
+    OrganizationType --> Organization
+    note right on link
+        Una organización debe ser de tipo
+        empresa operadora o transportista
+    endnote
+    Region "1" *-- "many" Commune
+    Commune "1" *-- "many" Owner
+    Car "1" *-- "many or 0" Application
+    Car "1" *-- "many or 0" CarDocuments
+    User "1" *-- "many or 0" Contract
+    Contract "1" *-- "many" Application
+    Operator "1" *-- "many" Application
+    Contract "1" *-- "many" ContractTerms
+    Terms "1" *-- "many" ContractTerms
+    Role "1" *-- "many" User
+    Operator "1" *-- "many" OperatorDocuments
+    User "1" *-- "many" Terms
+    User "1" *-- "many or 0" PromotionsOwner
+    User "1" *-- "many or 0" PromotionsAssign
+    PromotionsOwner "1" *-- "many or 0" PromotionsAssign
+    
 @enduml
