@@ -1,0 +1,28 @@
+@startuml Betransport
+!theme materia-outline
+node [Amazon-LightSail] {
+    rectangle "MVC-Betransport" AS CBT
+
+}
+actor User
+
+circle Internet as INT
+CBT -- INT
+User --> CBT
+node "External Services" {
+    component [Maps] AS C1
+    component [Simpleroute] AS C2
+    component [Beetrack] AS C3
+    component [Pay] AS C4
+}
+C1 <--> CBT
+C2 <--> CBT
+C3 <--> CBT
+C4 <--> CBT
+
+node "Data Store" {
+    database "Betransport_DB" {
+    }
+
+}
+@enduml
