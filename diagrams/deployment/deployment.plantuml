@@ -1,12 +1,18 @@
 @startuml deployment
+    !theme materia-outline
     component ControlManagment
     component ContractsManagment
     component ContractsAndRoutesReport
     component DocumentValidationSystem
+    component ResourceManagement
     component MetricsManagment
     component TrainingManagment
     component TracingManagment
-    component AuthComponent
+
+    node "Data Store" {
+        database "Betransport_DB" {
+        }
+    }
 
     node LoginSystem [
         <b>Login system
@@ -27,6 +33,8 @@
         Control
         ....
         Documentation
+        ....
+        Resources
         ....
         Training
         ....
@@ -49,9 +57,7 @@
         Reinitialize login system
     ]
 
-    ContractsManagment -[dashed]-> ContractsAndRoutesReport
-
-    LoginSystem -[bold]-> AuthComponent
+   
     LoginSystem -[bold]-> TransportistPanel
     LoginSystem  -[bold]-> LogisticOperatorPanel
 
@@ -60,14 +66,22 @@
     LogisticOperatorPanel -[bold]-> DocumentValidationSystem
     LogisticOperatorPanel -[bold]-> MetricsManagment
 
-    TracingManagment -[dashed]-> ContractsAndRoutesReport
-
     TransportistPanel-[bold]->ControlManagment
     TransportistPanel-[bold]->ContractsManagment
     TransportistPanel-[bold]->TrainingManagment
     TransportistPanel-[bold]->TracingManagment
     TransportistPanel-[dashed]->LogoutSystem
     TransportistPanel-[dashed]->DocumentValidationSystem
+    TransportistPanel-[bold]->ResourceManagement
+
+    ControlManagment -[bold]->Betransport_DB
+    ContractsManagment -[bold]->Betransport_DB
+    ContractsAndRoutesReport -[bold]->Betransport_DB
+    DocumentValidationSystem -[bold]->Betransport_DB
+    MetricsManagment -[bold]->Betransport_DB
+    ResourceManagement -[bold]->Betransport_DB
+    TracingManagment -[bold]->Betransport_DB
+    TrainingManagment -[bold]->Betransport_DB
 
 
 @enduml

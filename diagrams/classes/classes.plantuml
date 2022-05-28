@@ -1,4 +1,5 @@
 @startuml classes
+    !theme materia-outline
     enum OrganizationType {
         OPERATING_COMPANIES
         TRANSPORTIST_COMPANIES

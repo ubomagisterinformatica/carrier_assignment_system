@@ -1,15 +1,15 @@
 @startgantt reclutamiento
-hide footbox
-projectscale monthly
-Project starts the 1st of may 2022
-[Reclutamiento] as [TASK1] lasts 90 days
-[Seguimiento] as [TASK2] lasts 90 days
-[Control] as [TASK3] lasts 90 days
-[Pagos] as [TASK4] lasts 90 days
-[Gamificación] as [TASK5] lasts 90 days
-' [TASK1] is colored in Lavender/LightBlue
-[TASK1]->[TASK2]
-[TASK2]->[TASK3]
-[TASK3]->[TASK4]
-[TASK4]->[TASK5]
+    hide footbox
+    projectscale monthly
+    Project starts the 1st of may 2022
+    [Reclutamiento] as [TASK1] lasts 90 days
+    [Seguimiento] as [TASK2] lasts 90 days
+    [Control] as [TASK3] lasts 90 days
+    [Pagos] as [TASK4] lasts 90 days
+    [Gamificación] as [TASK5] lasts 90 days
+    ' [TASK1] is colored in Lavender/LightBlue
+    [TASK1]->[TASK2]
+    [TASK2]->[TASK3]
+    [TASK3]->[TASK4]
+    [TASK4]->[TASK5]
 @endgantt
