@@ -3,10 +3,12 @@
     component ContractsManagment
     component ContractsAndRoutesReport
     component DocumentValidationSystem
+    component ResourceManagement
     component MetricsManagment
     component TrainingManagment
     component TracingManagment
-    component AuthComponent
+
+    database database
 
     node LoginSystem [
         <b>Login system
@@ -27,6 +29,8 @@
         Control
         ....
         Documentation
+        ....
+        Resources
         ....
         Training
         ....
@@ -49,9 +53,7 @@
         Reinitialize login system
     ]
 
-    ContractsManagment -[dashed]-> ContractsAndRoutesReport
-
-    LoginSystem -[bold]-> AuthComponent
+   
     LoginSystem -[bold]-> TransportistPanel
     LoginSystem  -[bold]-> LogisticOperatorPanel
 
@@ -60,14 +62,22 @@
     LogisticOperatorPanel -[bold]-> DocumentValidationSystem
     LogisticOperatorPanel -[bold]-> MetricsManagment
 
-    TracingManagment -[dashed]-> ContractsAndRoutesReport
-
     TransportistPanel-[bold]->ControlManagment
     TransportistPanel-[bold]->ContractsManagment
     TransportistPanel-[bold]->TrainingManagment
     TransportistPanel-[bold]->TracingManagment
     TransportistPanel-[dashed]->LogoutSystem
     TransportistPanel-[dashed]->DocumentValidationSystem
+    TransportistPanel-[bold]->ResourceManagement
+
+    ControlManagment -[bold]->database
+    ContractsManagment -[bold]->database
+    ContractsAndRoutesReport -[bold]->database
+    DocumentValidationSystem -[bold]->database
+    MetricsManagment -[bold]->database
+    ResourceManagement -[bold]->database
+    TracingManagment -[bold]->database
+    TrainingManagment -[bold]->database
 
 
 @enduml
