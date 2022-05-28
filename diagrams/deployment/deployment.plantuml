@@ -1,0 +1,73 @@
+@startuml deployment
+    component ControlManagment
+    component ContractsManagment
+    component ContractsAndRoutesReport
+    component DocumentValidationSystem
+    component MetricsManagment
+    component TrainingManagment
+    component TracingManagment
+    component AuthComponent
+
+    node LoginSystem [
+        <b>Login system
+        ----
+        Initialize transportist panel
+        ....
+        Initialize logistic operator
+        panel
+        ....
+        Register user       
+    ]
+
+    node TransportistPanel [
+        <b>Transportist panel
+        ----
+        Contracts
+        ....
+        Control
+        ....
+        Documentation
+        ....
+        Training
+        ....
+        Tracing
+    ]
+
+    node LogisticOperatorPanel [
+        <b> Logistic operator panel
+        ----
+        Metrics
+        ....
+        Contracts and routes visualization
+        ....
+        Documents validation
+    ]
+
+    node LogoutSystem [
+        <b> Logout system
+        ----
+        Reinitialize login system
+    ]
+
+    ContractsManagment -[dashed]-> ContractsAndRoutesReport
+
+    LoginSystem -[bold]-> AuthComponent
+    LoginSystem -[bold]-> TransportistPanel
+    LoginSystem  -[bold]-> LogisticOperatorPanel
+
+    LogisticOperatorPanel -[dashed]-> LogoutSystem
+    LogisticOperatorPanel -[bold]-> ContractsAndRoutesReport
+    LogisticOperatorPanel -[bold]-> DocumentValidationSystem
+    LogisticOperatorPanel -[bold]-> MetricsManagment
+
+    TracingManagment -[dashed]-> ContractsAndRoutesReport
+
+    TransportistPanel-[bold]->ControlManagment
+    TransportistPanel-[bold]->ContractsManagment
+    TransportistPanel-[bold]->TrainingManagment
+    TransportistPanel-[bold]->TracingManagment
+    TransportistPanel-[dashed]->LogoutSystem
+    TransportistPanel-[dashed]->DocumentValidationSystem
+
+
+@enduml
