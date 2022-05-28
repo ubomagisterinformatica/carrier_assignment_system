@@ -1,4 +1,5 @@
 @startuml
+!theme materia-outline
 Retail -> OPL : Asigna carga
 OPL -> Transportista : Asigna ruta
 Transportista -> Customer : Entrega carga
